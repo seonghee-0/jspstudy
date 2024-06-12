@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <!-- 
+    서버 측 주소 만들기
+    /ContextPath/URLMapping
+   -->
+  <!-- 1. <a> 태그 -->
+  
+  <div>
+    <a href="/servlet/request?age=10">요청1</a>
+  </div>
+  
+  <!-- 2. JavaScript : location 객체 요청 -->
+  <div>
+    <a href="javascript:ex1()">요청2</a>
+    <input type="hidden" id="inp-age" value="20">
+  </div>
+  <script>
+  const ex1 = ()=>{
+    const age = document.getElementById('inp-age');
+  location.href='/servlet/request?age=' + age.value;
+    // ( `` 사용 문법으로 바꾸면 아래 코드)    
+    //location.href=`/servlet/request?age=${age.value}`;
+  }
+  </script>
+  <div>
+    <button type="button" id="btn" data-age="30" data-name="홍길동">요청3</button>
+  </div>    
+  <script>
+    document.getElementById('btn').addEventListener('click', (evt)=>{
+      location.href='/servlet/request?age='+evt.target.dataset.age + '&name='+ evt.target.dataset.name;
+      //data-age 속성 값 받아올 때 해당요소.dataset.data명
+    })
+  </script>
+  
+  
+  <!-- 3. <form> 태그 요청 : submit -->
+  <div>
+  <!-- 서버측으로 보내기 위해선 name 값이 존재해야함 -->
+    <form id="frm-input" action="/servlet/request" method="get">
+      <input type="text" name="age" id="age" placeholder="나이" > <!-- value 값은 사용자가 적는 값을 받아옴 --> 
+      <input type="text" name="name" id="name" placeholder="이름" >
+      <button type="submit">요청</button>
+    </form> 
+  </div>
+  <script>
+    const frmInput = document.getElementById('frm-input');
+    const age = document.getElementById('age');
+    const name = document.getElementById('name');
+    frmInput.addEventListener('submit', (evt)=>{
+      const regAge = /[^0-9]/;
+      if(regAge.test(age.value)){
+        alert('나이는 숫자만 입력할 수 있습니다.');
+        age.focus();
+        evt.preventDefault();
+        // preventDefault : 이벤트 기본동작을 막는 이벤트
+        return;
+        }
+      if(name.value.trim().length === 0){ //name.value.trim().length === 0 과 name.value.trim() === '' 이랑 같음
+        alert('이름은 필수입니다.');
+        name.focus();
+        evt.preventDefault();
+        return;
+      }
+     })
+  </script>
+
+  
+  <div>
+  
+    <form method="post" action="/servlet/request">
+
+    <!-- 입력 상자 -->
+      <div>
+        <input type="text" name="id" placeholder="아이디">
+      </div>
+      <div>
+        <input type="password" name="pw" placeholder="비밀번호">
+      </div>
+      <div>
+        <textarea name="intro" id="" cols="30" rows="10"></textarea>
+      </div>
+  
+      <!-- 단일 선택 -->
+      <div> 성별 : 
+        <input type="radio" name="gender" id="man" value="man"><label for="man">남자</label>
+        <input type="radio" name="gender" id="woman" value="woman"><label for="woman">여자</label>
+        <input type="radio" name="gender" id="none" value="none" checked><label for="none" >선택안함</label>
+      </div>
+      
+      <!-- 다중 선택-1 (name 이 같을 때) --> 
+      <div> 색상 : 
+        <input type="radio" name="color" id="yellow" value="yellow"><label for="yellow">노랑</label>
+        <input type="radio" name="color" id="green" value="green"><label for="green">초록</label>
+        <input type="radio" name="color" id="blue" value="blue" ><label for="blue" >파랑</label>
+      </div>
+  
+      <!-- 다중 선택-2 (name 이 다를때) -->
+      <div> 취미 : 
+        <input type="checkbox" name="game" id="game" value="game"><label for="game">게임</label>
+        <input type="checkbox" name="travel" id="travel" value="travel"><label for="travel">여행</label>
+        <input type="checkbox" name="lego" id="lego" value="lego"><label for="lego">레고</label>
+      </div>
+  
+      <!-- 목록 선택 -->
+      <div>
+        <select name="region">
+          <option value="서울" >02</option> <!-- value 가 있을 땐 서버측에 value 값이 전달된다 -->
+          <option>032</option>  <!-- value 가 없을 땐 서버측에 태그 내 text 가 전달된다 -->
+          <option>031</option>  <!-- value 값과 text 는 같은값을 넣지 않기!!!! 서버측에 값을 바꿔서 보내고싶을때만 value 값을 넣는다 -->
+        </select>
+      </div>
+  
+      <!-- 목록에서 선택 + 직접 입력 -->
+      <input type="text" name="host" list="host">
+      <datalist id="host">
+        <option value="">naver.com</option>
+        <option value="">kakao.com</option>
+        <option value="">gmal.com</option>
+      </datalist>
+      
+      <!-- 정해진 값 -->
+      <input type="hidden" name="charencoding" value="UTF-8">
+      <input type="hidden" name="author" value="hong">
+      <hr>
+  
+      <!-- 서브밋 버튼 : submit이 디폴트값-->
+      <button type="submit">전송</button> 
+    </form>
+    
+  </div>
+  
+  
+  <!-- 4. JavaScript : 비동기 요청(별도 수업) -->
+  
+</body>
+</html>
