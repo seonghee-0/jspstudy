@@ -67,12 +67,6 @@ local.properties
 # Spring Boot Tooling
 .sts4-cache/
 
-# Eclipse Core       
-.project 
-
-# JDT-specific (Eclipse Java Development Tools)      
-.classpath
-
 ### Java ###
 # Compiled class file
 *.class
@@ -91,7 +85,7 @@ local.properties
 *.war
 *.nar
 *.ear
-*.zip
+#*.zip
 *.tar.gz
 *.rar
 
