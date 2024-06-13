@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../assets/lib/jquery-3.7.1.min.js"></script> 
+</head>
+<body>
+  <div>
+    <button type ="button" id="weather-btn">현재 날씨 가져오기</button>
+  </div>
+  <div>
+    <table border = "1">
+      <caption id="caption"></caption>
+      <thead id="thead">
+      </thead>
+      <tbody id="tbody">
+      </tbody>
+    </table>
+  </div>
+  <script>
+    const getWeather = ()=>{
+      const options = {
+       method:'GET'
+      }
+      fetch('/servlet/weather', options )
+      .then(response=>response.text()) 
+      .then(resData=>{
+        //XMLDocument로 변경
+        // XML 데이터를 일반 텍스트로 받은 뒤 XMLDocument로 변경해서 처리하기
+        const domParser = new DOMParser();
+        const xmlDocument = domParser.parseFromString(resData, 'application/xml'); // xml의 Content-Type적어줌
+        
+        // dom처리
+        const thead = document.getElementById('thead');
+        /* <thead id="thead"> */
+        thead.innerHTML = '<tr><td>지역</td><td>날씨</td><td>온도</td>';
+        
+        // <caption id="caption"></caption>
+        const caption = document.getElementById('caption');
+        
+        const weather = xmlDocument.getElementsByTagName('weather')[0];
+        
+        caption.innerHTMl = weather.getAttribute('year') + '년'
+                          + weather.getAttribute('month') + '월'
+                          + weather.getAttribute('day') + '일'
+                          + weather.getAttribute('hour') + '시';
+        // dom처리
+        const tbody = document.getElementById('tbody');
+        /* <tbody id="tbody"> */
+        tbody.innerHTML ='' // 데이터 초기화(데이터 쌓이는걸 방지)
+        const locals = xmlDocument.getElementsByTagName('local'); 
+        for(let i = 0; i<locals.length; i++){
+          let tr = '<tr>';
+             tr += '<td>' + locals[i].textContent + '</td>';
+             tr += '<td>' + locals[i].getAttribute('desc') + '</td>';
+             tr += '<td>' + locals[i].getAttribute('ta') + '</td>';
+             tr += '</tr>';
+          tbody.innerHTML += tr;
+        }
+      })
+    }
+    document.getElementById('weather-btn').onclick = getWeather;
+  </script>
+
+  <div>
+    <select id="siDo">
+      <option value="1100">서울</option>
+      <option value="2300">인천</option>
+    </select>
+    <select id="guGun">
+      <option value="1116">강남구</option>
+      <option value="2304">부평구</option>
+    </select>
+    <button type="button" id="accident-btn">사망자수가져오기</button>
+  </div>  
+  <style>
+    #accidents {
+      display: flex;
+      width: 950px;
+      margin: auto;
+    }
+    .accident {
+      width: 300px;
+      height: 100px;
+      border: 1px solid gray;
+    }
+  </style>
+  <div id="accidents"></div>
+  <script>
+    const accidentBtn = $('#accident-btn');
+    accidentBtn.on('click', (evt)=>{
+      
+      
+      //  비동기 요청
+      $.ajax({
+        /* 요청:start */
+         type:'get',
+         url :'/servlet/accident',
+         data :'siDo=' + $('#siDo').val() + '&guGun=' +$('#guGun').val(), 
+         //value를 가지고 올때 value함수 사용 가능 => val()
+        /* 요청:end */
+        /* 응답:start */
+         dataType:'json'
+        /* 응답:end */
+      }).done(resData=>{ // 받아온 json data는 resData에 담긴다.
+        const accidents = $('#accidents');
+        accidents.empty();
+        $.each(resData.items.item, (i, accident)=>{
+          console.log(accident);
+          let div = '<div class="accident">';
+          div += '<ul>';
+          div += '<li>날짜 : ' + accident.occrrnc_dt + '</li>';
+          div += '<li>인원 : ' + accident.dth_dnv_cnt + '</li>';
+          div += '</ul>';
+          div += '</div>';
+          accidents.append(div);
+        })
+      })
+    })
+  </script>
+
+</body>
+</html>

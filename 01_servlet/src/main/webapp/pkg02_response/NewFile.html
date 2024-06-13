@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!--  서블릿 요청 주소 : http://localhost:9090/servlet/response  -->
+<!--           
+    http://localhost:9090/servlet/pkg02_response/NewFile.html
+           ㄴ Context path 주소  /   ㄴ폴더명   /  ㄴ파일명
+    ※ webapp 까지의 경로는 Context path 주소를 의미함
+ -->
+
+<!-- 아이디와 비번을 입력 받아서 MyResponse로 전달하는 <form> 태그 만들기 -->
+<div>
+  <form action="/servlet/response" method="post">
+    <input type="text" id="id" name="id" placeholder="아이디">
+    <input type="text" id="pw" name="pw" placeholder="패스워드">
+    <button type="submit" id="btn1">전송1</button>
+  </form>
+</div>
+</body>
+</html>

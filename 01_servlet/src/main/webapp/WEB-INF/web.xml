@@ -19,4 +19,44 @@
     <servlet-name>MyRequest</servlet-name>
     <url-pattern>/request</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyResponse</display-name>
+    <servlet-name>MyResponse</servlet-name>
+    <servlet-class>pkg02_response.MyResponse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyResponse</servlet-name>
+    <url-pattern>/response</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Weather</display-name>
+    <servlet-name>Weather</servlet-name>
+    <servlet-class>pkg03_ajax.Weather</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Weather</servlet-name>
+    <url-pattern>/weather</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Accident</display-name>
+    <servlet-name>Accident</servlet-name>
+    <servlet-class>pkg03_ajax.Accident</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Accident</servlet-name>
+    <url-pattern>/accident</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Upload</display-name>
+    <servlet-name>Upload</servlet-name>
+    <servlet-class>pkg04_file.Upload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Upload</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
 </web-app>
