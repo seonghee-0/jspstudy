@@ -58,7 +58,7 @@ public class Upload extends HttpServlet {
     // listFiles() -- 저장된 모든 파일을 가지고옴
 	  for(File file : files) {
 	    String filename = file.getName();
-	    out.println("<div>" + filename + "</div>");
+	    out.println("<div><a href=\"/servlet/download?filename=" + filename + "\">" + filename + "</a></div>");
 	  }
 	  out.flush(); // for 문 돌릴 땐 flush 사용 권장
 	  out.close(); // out 끝내고 닫기
