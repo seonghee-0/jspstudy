@@ -1,0 +1,15 @@
+JSP 내장 객체
+1. 이미 생성된 9개의 객체가 있다.
+2. new 와 같은 방법으로 생성할 필요가 없다.
+3. 내장 객체 9가지
+  1) pageContext
+  2) request
+  3) session
+  4) application
+  --------------- 여기까지 Data Binding 이 가능한 객체 4가지
+  5) response
+  6) out
+  --------------- 여기까지 주요 내장 객체 6가지
+  7) config
+  8) page
+  9) exception

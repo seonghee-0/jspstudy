@@ -19,7 +19,7 @@ public class ReadCookie extends HttpServlet {
 	  
 	  // 쿠키 가져오기(요청)
 	  Cookie[] cookies = request.getCookies();
-	  
+
 	  if(cookies == null) {
 	    return;
 	  }
