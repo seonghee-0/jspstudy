@@ -1,0 +1,15 @@
+MVC Pattern
+
+1. Model/View/Controller Pattern
+2. 웹 애플리케이션 개발 패턴 중 가장 널리 사용하는 패턴이다.
+3. Model : 비즈니스 로직 (클래스)
+4. View  : 클라이언트 화면 (JSP)
+5. Controller : 요청/응답 (Servlet)
+6. 흐름
+  Client    Server                 Database
+  -------------------------------------------
+  View   →  Controller  →  Model
+                             ↓
+  View   ←  Controller  ←  Model
+  -------------------------------------------
+  JSP       Servlet        Class

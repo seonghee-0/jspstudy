@@ -104,6 +104,33 @@ pageContext.setAttribute("book",book);
 <h1>${map.author}</h1>
 <h1>${map.price}</h1>
 
+<hr>
+<%
+  pageContext.setAttribute("a", 10);
+  pageContext.setAttribute("b", 3);
+%>
+
+<div>${a + b}</div>
+<div>${a - b}</div>
+<div>${a * b}</div>
+<div>${a / b}, ${a div b}</div>
+<div>${a % b}, ${a mod b}</div>
+
+<div>${a > b},  ${a gt b}</div>
+<div>${a >= b}, ${a ge b}</div>
+<div>${a < b},  ${a lt b}</div>
+<div>${a <= b}, ${a le b}</div>
+<div>${a == b}, ${a eq b}</div>
+<div>${a != b}, ${a ne b}</div>
+
+<div>${a == 10 && b == 3}, ${a eq 10 and b eq 3}</div>
+<div>${a == 10 || b == 3}, ${a eq 10 or b eq 3}</div>
+<div>${!(a == 10)}, ${not (a eq 10)}</div>
+
+<div>${a > 0 ? "양수" : "음수"}</div>
+
+</body>
+</html>
 
 
 
