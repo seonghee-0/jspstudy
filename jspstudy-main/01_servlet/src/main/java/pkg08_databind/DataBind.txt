@@ -1,0 +1,12 @@
+데이터 저장(Data Bind)
+
+1. 속성(Attribute)의 형태로 저장한다.
+2. 저장 장소에 따라 생명 주기(Life Cycle)가 다르다.
+3. 종류
+  1) ServletContext     : 컨텍스트 종료(애플리케이션 실행 종료) 전까지 데이터를 유지한다. (전체방문자수)
+  2) HttpSession        : 세션 종료(웹 브라우저 종료) 전까지 데이터를 유지한다. (로그인, 장바구니)
+  3) HttpServletRequest : 요청 종료(응답) 전까지 데이터를 유지한다. (1회성)
+4. 속성(Attribute) 처리 메소드
+  1) setAttribute(속성, 값) : java.lang.Object 타입의 값을 저장한다.
+  2) getAttribute(속성)     : java.lang.Object 타입의 값을 반환한다. (캐스팅이 필요할 수 있다.)
+  3) removeAttribute(속성)  : 제거한다.
