@@ -26,6 +26,30 @@
  * 작성해야하는 페이지는 다 form 메소드 post처리
  * input name 값 => 파라미터
  */
-
+ 
+ const registerForm = document.getElementById('register-form');
+ const title = document.getElementById('title');
+ const price = document.getElementById('price');
+ 
+ const checkSubmit = ()=>{      
+   registerForm.addEventListener('submit', (evt)=>{
+     if(title.value === ''){
+       alert('제목은 반드시 입력해야 합니다.');
+       title.focus();
+       evt.preventDefault();
+       return;
+     }
+     const regPrice = /^$|[^0-9]/;
+     if(regPrice.test(price.value)){
+       alert('가격은 숫자만 입력할 수 있습니다.');
+       price.focus();
+       evt.preventDefault();
+       return;
+     }
+   })
+ }
+ 
+ checkSubmit();
+ 
 </script>
 </html>
