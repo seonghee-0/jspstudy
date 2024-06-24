@@ -12,7 +12,7 @@ public interface BoardDAO {
   int insertBoard(BoardDTO board);
   int updateBoard(BoardDTO board); // 수정할 정보가 담겨있는 DTO
   int deleteBoard(int board_no); // 삭제할땐 모든 정보가 아닌 번호만 필요하기때문에 board_no받아오기
-  
+  int deleteBoardList(String board_no_list); // 문자열로 board_no_list를 받아옴
   void close() throws Exception; // close 작업
   
 }

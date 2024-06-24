@@ -12,39 +12,70 @@
 </head>
 <body>
 
+  <div>
+    <button type="button" onclick="location.href='${contextPath}/write.do'">작성하러가기</button>
+  </div>
   <div>총 ${total}개</div>
   <div>
-    <a href="${contextPath}/list.do?page=1&sort=DESC">내림차순</a>
+    <a href="${contextPath}/list.do?page=1&sort=DESC&display=${display}">내림차순</a>
     <span>|</span>
-    <a href="${contextPath}/list.do?page=1&sort=ASC">오름차순</a>
+    <a href="${contextPath}/list.do?page=1&sort=ASC&display=${display}">오름차순</a>
   </div>
-  <table border="1">
-    <thead>
-      <tr>
-        <th></th>
-        <th>게시글 번호</th>
-        <th>제목</th>
-        <th>작성일자</th>
-      </tr>
-    </thead>
-    <tbody>
-      <c:forEach items="${boardList}" var="board"> 
-          <tr>
-            <td><input type="checkbox" class="each-chk"></td>
-            <td>${board.board_no}</td>
-            <td>${board.title}</td>
-            <td>${board.create_dt}</td>
-          </tr>
-      </c:forEach>
-      <!-- 리스트 items 하나씩 빼는 var -->
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4"> -</td>
-      </tr>
-    </tfoot>
-  </table>
   
+  <div>
+    <select id="display">
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
+    </select>
+  </div>
+  
+  <script>
+    const display = document.getElementById('display');
+    display.value = ${display}; // display option 값을 넘어온 display 값으로 바꿔줌
+    display.addEventListener('change', evt=>{
+      location.href = '${contextPath}/list.do?page=1&sort=${sort}&display=' + display.value;
+    })
+  </script>
+  <form action="${contextPath}/removeBoardList.do" method="post"> <!-- action 선택삭제 눌렀을 때 할 일 -->
+    <table border="1">
+      <thead>
+        <tr>
+          <th><button type="submit">선택삭제</button></th>
+          <th>게시글 번호</th>
+          <th>제목</th>
+          <th>작성일자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach items="${boardList}" var="board"> 
+            <tr>
+              <td><input type="checkbox" name="board_no_list" value="${board.board_no}" class="each-chk"></td>
+              <td>${board.board_no}</td>
+              <td><a href="${contextPath}/detail.do?board_no=${board.board_no}">${board.title}</a></td>
+              <td>${board.create_dt}</td>
+            </tr>
+        </c:forEach>
+        <!-- 리스트 items 하나씩 빼는 var -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">${paging}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </form>
+  <script>
+    if('${registerMessage}' !== '')
+      alert('${registerMessage}');
+    
+    if('${removeMessage}' !== '')
+      alert('${removeMessage}');
+    
+    if('${modifyMessage}' !== '')
+      alert('${modifyMessage}');
+    
+  </script>
 
 </body>
 </html>
