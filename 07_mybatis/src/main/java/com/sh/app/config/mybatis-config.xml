@@ -19,6 +19,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource=""/>
+    <mapper resource="com/sh/app/dao/BoardMapper.xml"/>
   </mappers>
 </configuration>
